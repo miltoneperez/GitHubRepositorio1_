@@ -21,27 +21,14 @@ Dictionary<string, int> dep = new Dictionary<string, int>()
     {"Río San Juan",135446},
     {"Rivas",182645}
 };
-//Encontrar el mayor y el menor
-int maxDep = dep.Values.ToArray().Max();
-int minDep = dep.Values.ToArray().Min();
-string maxDepkey = "", minDepkey = "";
-//Encontrar los nombres del mayor y el menor
-foreach (var item in dep.Keys)
-{
-    if (dep[item] == maxDep)
-        maxDepkey = item;
-    if (dep[item] == minDep)
-        minDepkey = item;
-    if (minDepkey != "" && maxDepkey != "")
-        break;
-}
-//Ordenar con orderBy de LINQ
+//Ordenando de manera ascendente
 var orderDepResult=dep.OrderBy(d=>d.Value);
 
-//mostrar los resultados
+//mostrar el diccionario ordenado por población
 foreach (var item in orderDepResult)
     Console.WriteLine($"{item.Key,20} ==> {item.Value,10:N0}");
-
+//Suma de toda la población
 Console.WriteLine($"Población General:{dep.Values.Sum():N0}");
-Console.WriteLine($"Departamento con mayor Población:{maxDepkey}");
-Console.WriteLine($"Departamento con menor Población:{minDepkey}");
+//Mayor y menor población
+Console.WriteLine($"Departamento con mayor Población:{orderDepResult.First().Key}");
+Console.WriteLine($"Departamento con menor Población:{orderDepResult.Last().Key}");
